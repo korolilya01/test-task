@@ -5,6 +5,7 @@ import { Icon } from '../Utils/Icon';
 
 import { icons } from '../../services/arrays';
 
+import './Comment.scss';
 import classNames from 'classnames';
 
 export const Comment = (props) => {
@@ -22,7 +23,7 @@ export const Comment = (props) => {
         onClick={toggleTree}
         className={classNames(
           'app-node-main',
-          props.replies.length !== 0 ? 'app-node-dropdown' : null, //to think how to do that better
+          props.replies?.length !== 0 ? 'app-node-dropdown' : null, //to think how to do that better
           isShowTree ? 'app-node-dropdown-open' : null, //to think how to do that better
         )}
       >
@@ -32,22 +33,37 @@ export const Comment = (props) => {
             (
               item,
               index, //buttons for working with notice's settings
-            ) => (
-              <Button
-                key={index}
-                className="app-node-button"
-                content={
-                  <Icon className="app-node-icon" iconHref={`#${item}`} />
-                }
-              />
-            ),
+            ) => {
+              return (
+                <Button
+                  key={index}
+                  onClick={() => {
+                    if (typeof props.showForm === 'function') {
+                      props.showForm(item.action, props.nodeId);
+                    }
+                  }}
+                  className="app-node-button"
+                  content={
+                    <Icon
+                      className="app-node-icon"
+                      iconHref={`#${item.action}`}
+                    />
+                  }
+                />
+              );
+            },
           )}
       </div>
       {props.replies && isShowTree && (
         <ul className="app-node-container">
-          {props.replies.map((reply, index) => (
-            <li key={index}>
-              <Comment text={reply.text} replies={reply.replies} />
+          {props.replies.map((item) => (
+            <li key={item.id}>
+              <Comment
+                text={item.name}
+                replies={item.children}
+                nodeId={item.id}
+                showForm={props.showForm}
+              />
             </li>
           ))}
         </ul>
