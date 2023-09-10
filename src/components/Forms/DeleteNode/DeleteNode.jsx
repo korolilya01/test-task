@@ -9,18 +9,16 @@ export const DeleteNode = ({
   initialArray,
   nodeId,
   closeAllForms,
-  setArr,
-  arr,
+  setResult,
+  result,
 }) => {
-  const nodeObj = findObjectById(nodeId, arr);
+  const nodeObj = findObjectById(nodeId, result);
 
   const sentForm = (e) => {
     e.preventDefault();
 
     try {
-      deleteNode(initialArray, nodeId, undefined, setArr).then((r) =>
-        console.log(r),
-      );
+      deleteNode(initialArray, nodeId, undefined, setResult);
     } catch (error) {
       console.error('Ошибка при отправке данных:', error);
     }

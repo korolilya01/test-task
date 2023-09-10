@@ -9,16 +9,16 @@ export const RenameNode = ({
   initialArray,
   nodeId,
   closeAllForms,
-  setArr,
-  arr,
+  setResult,
+  result,
 }) => {
   const [newNodeName, setNewNodeName] = useState('');
 
-  const nodeObj = findObjectById(nodeId, arr);
+  const nodeObj = findObjectById(nodeId, result);
 
   useEffect(() => {
     setNewNodeName(nodeObj.name);
-  }, []);
+  }, [nodeObj.name]);
 
   const writeNewName = (e) => {
     setNewNodeName(e.target.value);
@@ -28,9 +28,7 @@ export const RenameNode = ({
     e.preventDefault();
 
     try {
-      renameNode(initialArray, nodeId, setArr, newNodeName).then((r) =>
-        console.log(r),
-      );
+      renameNode(initialArray, nodeId, setResult, newNodeName);
     } catch (error) {
       console.error('Ошибка при отправке данных:', error);
     }

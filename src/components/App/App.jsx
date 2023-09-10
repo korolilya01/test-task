@@ -8,7 +8,7 @@ import { fetchData } from '../../services/functions/nodeOperation';
 import { initialArray } from '../../services/constants';
 
 export const App = () => {
-  const [arr, setArr] = useState([]);
+  const [result, setResult] = useState([]);
   const [nodeId, setNodeId] = useState(null);
   const [formType, setFormType] = useState(null);
 
@@ -22,7 +22,7 @@ export const App = () => {
   };
 
   useEffect(() => {
-    fetchData(initialArray, setArr);
+    fetchData(initialArray, setResult);
   }, []);
 
   return (
@@ -34,21 +34,20 @@ export const App = () => {
           initialArray={initialArray}
           nodeId={nodeId}
           closeAllForms={closeAllForms}
-          arr={arr}
-          setArr={setArr}
+          result={result}
+          setResult={setResult}
         />
       )}
 
       <div className="app">
-        {arr.children?.map((comment) => (
+        <>
           <Comment
-            key={comment.id}
-            text={comment.name}
-            replies={comment.children}
-            nodeId={comment.id}
+            text="Root"
+            nodeId={result.id}
+            replies={result?.children}
             showForm={showForm}
           />
-        ))}
+        </>
       </div>
     </>
   );

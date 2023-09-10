@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { BASE_URL, END_POINT } from '../constants';
 
-export const fetchData = async (obj, setArr) => {
+export const fetchData = async (obj, setResult) => {
   try {
     const response = await axios.get(
       encodeURI(`${BASE_URL}${END_POINT}.get?treeName=${obj.treeName}`),
     );
-    setArr(response.data);
+    setResult(response.data);
   } catch (error) {
-    console.log('Ошибка при загрузке данных:', error);
+    console.error('Ошибка при загрузке данных:', error);
   }
 };
 
@@ -17,17 +17,15 @@ export const performNodeOperation = async (
   initialArray,
   nodeId,
   nodeName,
-  setArr,
+  setResult,
   newNodeName,
 ) => {
   try {
     let url;
-    const { treeName, parentNodeId } = initialArray;
+    const { treeName } = initialArray;
     switch (operationType) {
       case 'create':
-        url = `${BASE_URL}${END_POINT}.node.create?treeName=${treeName}&parentNodeId=${
-          nodeId || parentNodeId
-        }&nodeName=${nodeName || initialArray.nodeName}`;
+        url = `${BASE_URL}${END_POINT}.node.create?treeName=${treeName}&parentNodeId=${nodeId}&nodeName=${nodeName}`;
         break;
       case 'delete':
         url = `${BASE_URL}${END_POINT}.node.delete?treeName=${treeName}&nodeId=${nodeId}`;
@@ -39,27 +37,44 @@ export const performNodeOperation = async (
         throw new Error('Unsupported operation type');
     }
     await axios.post(encodeURI(url));
-    await fetchData(initialArray, setArr);
+    await fetchData(initialArray, setResult);
   } catch (error) {
-    console.log('Ошибка при загрузке данных:', error);
+    console.error('Ошибка при загрузке данных:', error);
   }
 };
 
-export const createNode = async (initialArray, nodeId, nodeName, setArr) => {
-  await performNodeOperation('create', initialArray, nodeId, nodeName, setArr);
+export const createNode = async (initialArray, nodeId, nodeName, setResult) => {
+  await performNodeOperation(
+    'create',
+    initialArray,
+    nodeId,
+    nodeName,
+    setResult,
+  );
 };
 
-export const deleteNode = async (initialArray, nodeId, nodeName, setArr) => {
-  await performNodeOperation('delete', initialArray, nodeId, nodeName, setArr);
+export const deleteNode = async (initialArray, nodeId, nodeName, setResult) => {
+  await performNodeOperation(
+    'delete',
+    initialArray,
+    nodeId,
+    nodeName,
+    setResult,
+  );
 };
 
-export const renameNode = async (initialArray, nodeId, setArr, newNodeName) => {
+export const renameNode = async (
+  initialArray,
+  nodeId,
+  setResult,
+  newNodeName,
+) => {
   await performNodeOperation(
     'rename',
     initialArray,
     nodeId,
     undefined,
-    setArr,
+    setResult,
     newNodeName,
   );
 };
