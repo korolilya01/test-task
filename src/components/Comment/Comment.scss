@@ -20,11 +20,11 @@
       height: 0;
       border-top: 6px solid transparent;
       border-bottom: 6px solid transparent;
-      border-left: 6px solid #000;
+      border-left: 6px solid var(--black);
       transition: transform 0.3s ease;
     }
     &-open {
-      background-color: #eeeff8;
+      background-color: var(--dark-white);
       &::before {
         transform: translateY(-50%) rotate(90deg);
       }

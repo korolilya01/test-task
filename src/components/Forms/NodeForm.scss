@@ -5,7 +5,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #fff;
+    background-color: var(--white);
     display: flex;
     flex-direction: column;
     width: 500px;
@@ -16,27 +16,27 @@
   }
   &-second-block {
     position: relative;
-    border-bottom: 1px solid #b9b9b9;
-    border-top: 1px solid #b9b9b9;
+    border-bottom: 1px solid var(--grey);
+    border-top: 1px solid var(--grey);
     padding: 20px;
     input {
       width: 100%;
       padding: 10px;
-      border: 1px solid #b9b9b9;
+      border: 1px solid var(--grey);
       outline: none;
       &:valid ~ span,
       &:focus ~ span {
-        color: #b9b9b9;
+        color: var(--grey);
         transform: translateX(10px) translateY(-6px);
         font-size: 0.9em;
         padding: 0 10px;
-        background-color: #fff;
+        background-color: var(--white);
       }
       &:focus ~ span {
-        color: #3f51b5;
+        color: var(--light-blue);
       }
       &:focus {
-        border-color: #3f51b5;
+        border-color: var(--general-blue);
       }
     }
     span {
@@ -46,7 +46,7 @@
       padding: 10px;
       pointer-events: none;
       font-size: 1em;
-      color: #b9b9b9;
+      color: var(--grey);
       transition: 0.3s;
     }
   }
@@ -62,42 +62,46 @@
   width: 100%;
   border-radius: 4px;
   outline: 0;
-  border: 1px solid black;
+  border: 1px solid var(--black);
 }
 
 input:hover {
-  border-color: #000;
+  border-color: var(--black);
 }
 
 .button {
   width: 100px;
   height: 30px;
-  border: 1px solid #3f51b5;
+  border: 1px solid var(--light-blue);
   border-radius: 4px;
   &:hover {
     cursor: pointer;
     transition: background-color ease 0.5s;
   }
   &-cancel {
-    background-color: #fff;
-    color: #3f51b5;
+    background-color: var(--white);
+    color: var(--light-blue);
     &:hover {
       background-color: rgba(63, 81, 181, 0.04);
     }
   }
   &-action {
-    background-color: #3f51b5;
-    color: #fff;
+    background-color: var(--light-blue);
+    color: var(--white);
+    box-shadow:
+      0 3px 1px -2px rgba(0, 0, 0, 0.2),
+      0 2px 2px 0 rgba(0, 0, 0, 0.14),
+      0 1px 5px 0 rgba(0, 0, 0, 0.12);
     &:hover {
-      background-color: #1f1fa8;
+      background-color: var(--dark-blue);
     }
   }
   &-delete {
-    background-color: #fff;
-    color: #f50057;
-    border-color: #f50057;
+    background-color: var(--white);
+    color: var(--general-red);
+    border-color: var(--general-red);
     &:hover {
-      background-color: rgba(245, 0, 87, 0.04);
+      background-color: var(--dark-red);
     }
   }
 }
