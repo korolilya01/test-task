@@ -1,0 +1,29 @@
+.pop-up {
+  position: absolute;
+  z-index: 200;
+  top: 1%;
+  right: 0;
+  left: 0;
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 8px;
+  background: var(--light-white);
+  align-items: center;
+  justify-content: space-between;
+  &-button {
+    background-color: var(--light-white);
+    border-radius: 50%;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(63, 81, 181, 0.04);
+    }
+  }
+  &-icon {
+    width: 15px;
+    height: 15px;
+  }
+}

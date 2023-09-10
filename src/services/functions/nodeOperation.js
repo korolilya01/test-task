@@ -1,10 +1,15 @@
 import axios from 'axios';
 import { BASE_URL, END_POINT } from '../constants';
 
+export let ERROR_MESSAGE = null;
+export let ERROR_CODE = null;
+export let ERROR_NODEID = null;
+
 export const fetchData = async (obj, setResult) => {
+  //generating get request
   try {
     const response = await axios.get(
-      encodeURI(`${BASE_URL}${END_POINT}.get?treeName=${obj.treeName}`),
+      encodeURI(`${BASE_URL}${END_POINT}.get?treeName=${obj.treeName}`), //encodeURI for encoding our URI
     );
     setResult(response.data);
   } catch (error) {
@@ -13,6 +18,7 @@ export const fetchData = async (obj, setResult) => {
 };
 
 export const performNodeOperation = async (
+  //generating a post request for others actions with a node
   operationType,
   initialArray,
   nodeId,
@@ -23,6 +29,7 @@ export const performNodeOperation = async (
   try {
     let url;
     const { treeName } = initialArray;
+
     switch (operationType) {
       case 'create':
         url = `${BASE_URL}${END_POINT}.node.create?treeName=${treeName}&parentNodeId=${nodeId}&nodeName=${nodeName}`;
@@ -40,6 +47,9 @@ export const performNodeOperation = async (
     await fetchData(initialArray, setResult);
   } catch (error) {
     console.error('Ошибка при загрузке данных:', error);
+    ERROR_CODE = error.response.status;
+    ERROR_MESSAGE = error.response.data.data.message;
+    ERROR_NODEID = error.response.data.id;
   }
 };
 

@@ -8,12 +8,13 @@ import './Comment.scss';
 import classNames from 'classnames';
 
 export const Comment = (props) => {
-  const [isShowTree, setIsShowTree] = useState(false);
-  const [isIconsVisible, setIsIconsVisible] = useState(false);
+  const [isShowTree, setIsShowTree] = useState(false); //opening and closing our tree
+  const [isIconsVisible, setIsIconsVisible] = useState(false); //opening and closing node's actions
 
   const { text, replies, showForm, nodeId } = props;
 
   const toggleTree = () => {
+    //function for opening and closing
     setIsShowTree(!isShowTree);
     setIsIconsVisible(!isIconsVisible);
   };

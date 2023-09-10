@@ -84,6 +84,15 @@ input:hover {
     &:hover {
       background-color: rgba(63, 81, 181, 0.04);
     }
+    &-full {
+      width: 100%;
+      margin: 0 8px;
+      background-color: var(--white);
+      color: var(--light-blue);
+      &:hover {
+        background-color: rgba(63, 81, 181, 0.04);
+      }
+    }
   }
   &-action {
     background-color: var(--light-blue);

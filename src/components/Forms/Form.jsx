@@ -6,14 +6,23 @@ import './NodeForm.scss';
 
 import classNames from 'classnames';
 
-export const Form = ({ value, sentForm, onChange, closeAllForms, content }) => {
+export const Form = ({
+  value,
+  sentForm,
+  onChange,
+  closeAllForms,
+  content,
+  name,
+}) => {
   return (
     <form onSubmit={sentForm} className="form-create-node">
       <div className="form-first-block">{content}</div>
       <div className="form-second-block">
-        {content === 'DELETE' ? (
+        {name === 'delete' ? (
           <p>Do you want to delete {value}?</p>
-        ) : content === 'RENAME' ? (
+        ) : name === 'error' ? (
+          <p>{value}</p>
+        ) : content === 'rename' ? (
           <>
             <input
               required="required"
@@ -42,17 +51,22 @@ export const Form = ({ value, sentForm, onChange, closeAllForms, content }) => {
       <div className="form-buttons">
         <Button
           onClick={() => closeAllForms()}
-          className="button button-cancel"
-          content=" CANCEL"
-        />
-        <Button
-          type="submit"
           className={classNames(
             'button',
-            content === 'DELETE' ? 'button-delete' : 'button-action',
+            name === 'error' ? 'button-cancel-full' : 'button-cancel',
           )}
-          content={content}
+          content="CANCEL"
         />
+        {name !== 'error' && (
+          <Button
+            type="submit"
+            className={classNames(
+              'button',
+              content === 'DELETE' ? 'button-delete' : 'button-action',
+            )}
+            content={content}
+          />
+        )}
       </div>
     </form>
   );

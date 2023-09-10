@@ -15,11 +15,11 @@ export const CreateNode = ({
   const writeNewName = (e) => {
     setNewName(e.target.value);
   };
-  const sentForm = (e) => {
+  const sentForm = async (e) => {
     e.preventDefault();
 
     try {
-      createNode(initialArray, nodeId, newName, setResult);
+      await createNode(initialArray, nodeId, newName, setResult);
       setNewName('');
     } catch (error) {
       console.error('Ошибка при отправке данных:', error);
@@ -33,6 +33,7 @@ export const CreateNode = ({
       onChange={writeNewName}
       closeAllForms={closeAllForms}
       content="ADD"
+      name="create"
     />
   );
 };

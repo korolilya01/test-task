@@ -14,11 +14,11 @@ export const DeleteNode = ({
 }) => {
   const nodeObj = findObjectById(nodeId, result);
 
-  const sentForm = (e) => {
+  const sentForm = async (e) => {
     e.preventDefault();
 
     try {
-      deleteNode(initialArray, nodeId, undefined, setResult);
+      await deleteNode(initialArray, nodeId, undefined, setResult);
     } catch (error) {
       console.error('Ошибка при отправке данных:', error);
     }
@@ -31,6 +31,7 @@ export const DeleteNode = ({
       sentForm={sentForm}
       closeAllForms={closeAllForms}
       content="DELETE"
+      name="delete"
     />
   );
 };

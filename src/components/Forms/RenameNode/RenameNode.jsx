@@ -24,11 +24,11 @@ export const RenameNode = ({
     setNewNodeName(e.target.value);
   };
 
-  const sentForm = (e) => {
+  const sentForm = async (e) => {
     e.preventDefault();
 
     try {
-      renameNode(initialArray, nodeId, setResult, newNodeName);
+      await renameNode(initialArray, nodeId, setResult, newNodeName);
     } catch (error) {
       console.error('Ошибка при отправке данных:', error);
     }
@@ -42,6 +42,7 @@ export const RenameNode = ({
       onChange={writeNewName}
       closeAllForms={closeAllForms}
       content="RENAME"
+      name="rename"
     />
   );
 };
